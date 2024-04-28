@@ -1,1 +1,46 @@
+class Attraction:
+    def __init__(self, name, location, capacity, ticket_price):
+        self.name = name
+        self.location = location
+        self.capacity = capacity
+        self.ticket_price = ticket_price
+        self.visitors = []
 
+    def check_availability(self):
+        return self.capacity - len(self.visitors)
+
+    def sell_ticket(self, visitor_name):
+        if self.check_availability() > 0:
+            self.visitors.append(visitor_name)
+            return True
+        else:
+            return False
+
+class Park:
+    def __init__(self, name, attractions):
+        self.name = name
+        self.attractions = attractions
+
+    def find_attraction(self, attraction_name):
+        for attraction in self.attractions:
+            if attraction.name == attraction_name:
+                return attraction
+        return None
+
+# 创建景区
+attraction1 = Attraction("Zoo", "Central Park", 100, 50)
+attraction2 = Attraction("Museum", "Downtown", 50, 30)
+attractions = [attraction1, attraction2]
+
+park = Park("City Park", attractions)
+
+# 模拟售票
+visitor1 = "Alice"
+visitor2 = "Bob"
+
+attraction1.sell_ticket(visitor1)
+attraction2.sell_ticket(visitor2)
+
+# 输出结果
+print(attraction1.check_availability())
+print(attraction2.check_availability())
