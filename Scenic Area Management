@@ -27,6 +27,16 @@ class Park:
                 return attraction
         return None
 
+    def book_ticket(self, attraction_name, visitor_name):
+        attraction = self.find_attraction(attraction_name)
+        if attraction:
+            if attraction.sell_ticket(visitor_name):
+                print(f"{visitor_name} has successfully booked a ticket for {attraction_name}.")
+            else:
+                print(f"Sorry, {attraction_name} is fully booked.")
+        else:
+            print(f"Attraction {attraction_name} not found.")
+
 # 创建景区
 attraction1 = Attraction("Zoo", "Central Park", 100, 50)
 attraction2 = Attraction("Museum", "Downtown", 50, 30)
@@ -34,12 +44,13 @@ attractions = [attraction1, attraction2]
 
 park = Park("City Park", attractions)
 
-# 模拟售票
+# 模拟订票
 visitor1 = "Alice"
 visitor2 = "Bob"
 
-attraction1.sell_ticket(visitor1)
-attraction2.sell_ticket(visitor2)
+park.book_ticket("Zoo", visitor1)
+park.book_ticket("Museum", visitor2)
+park.book_ticket("Zoo", "Charlie")
 
 # 输出结果
 print(attraction1.check_availability())
